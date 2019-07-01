@@ -18,4 +18,9 @@ describe('getPageInfo()', () => {
     const pageInfo = await getPageInfo('https://northcoders.com/');
     expect(pageInfo.links.length).to.eql(50);
   });
+
+  it('returns googleAnalytics = true if google analytics is found on the page', async () => {
+    const pageInfo = await getPageInfo('https://northcoders.com/');
+    expect(pageInfo.googleAnalytics).to.be.true;
+  });
 });

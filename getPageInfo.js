@@ -2,20 +2,26 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 const getPageInfo = async url => {
-  let result = {};
+  let page = null;
   try {
-    result = await axios.get(url);
+    page = await axios.get(url);
   } catch (error) {
     return { err: 'invalid url' };
   }
-  const $ = cheerio.load(result.data);
+  const $ = cheerio.load(page.data);
   const title = $('title').text();
   const links = [];
-  $('a').each((i, item) => {
-    const link = $(item).attr('href');
+  $('a').each((i, el) => {
+    const link = $(el).attr('href');
     links.push(link);
   });
-  return { title, links };
+  $('script').each((i, el) => {
+    const script = $(el).attr('src');
+  });
+
+  googleAnalytics = /GoogleAnalyticsObject/.test(page.data);
+
+  return { title, links, googleAnalytics };
 };
 
 module.exports = getPageInfo;
