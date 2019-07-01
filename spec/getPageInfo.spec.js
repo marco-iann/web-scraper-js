@@ -24,6 +24,11 @@ describe('getPageInfo()', () => {
     expect(pageInfo.googleAnalytics).to.be.true;
   });
 
+  it('returns googleAnalytics = false if google analytics is not found', async () => {
+    const pageInfo = await getPageInfo('https://northcoders.com/');
+    expect(pageInfo.googleAnalytics).to.be.false;
+  });
+
   it('returns secure = true if webpage is secure', async () => {
     const pageInfo = await getPageInfo('https://northcoders.com/');
     expect(pageInfo.secure).to.be.true;

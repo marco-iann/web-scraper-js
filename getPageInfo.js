@@ -23,8 +23,10 @@ const getPageInfo = async url => {
     const script = $(el).attr('src');
   });
 
-  // get google analytics
-  googleAnalytics = /GoogleAnalyticsObject/.test(response.data);
+  // check google analytics
+  googleAnalytics = /src="\/\/www.google-analytics.com\/analytics.js"/.test(
+    response.data
+  );
 
   // check if secure
   secure = response.request.res.client._httpMessage.agent.protocol === 'https:';
