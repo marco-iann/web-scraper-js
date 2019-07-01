@@ -4,12 +4,16 @@ const cheerio = require('cheerio');
 const getPageInfo = async url => {
   let page = null;
   try {
-    page = await axios.get(url);
+    response = await axios.get(url);
   } catch (error) {
     return { err: 'invalid url' };
   }
-  const $ = cheerio.load(page.data);
+  const $ = cheerio.load(response.data);
+
+  // get title
   const title = $('title').text();
+
+  // get links
   const links = [];
   $('a').each((i, el) => {
     const link = $(el).attr('href');
@@ -19,9 +23,13 @@ const getPageInfo = async url => {
     const script = $(el).attr('src');
   });
 
-  googleAnalytics = /GoogleAnalyticsObject/.test(page.data);
+  // get google analytics
+  googleAnalytics = /GoogleAnalyticsObject/.test(response.data);
 
-  return { title, links, googleAnalytics };
+  // check if secure
+  secure = response.request._redirectable._options.protocol === 'https:';
+
+  return { title, links, googleAnalytics, secure };
 };
 
 module.exports = getPageInfo;
