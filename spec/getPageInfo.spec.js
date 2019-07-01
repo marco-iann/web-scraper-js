@@ -13,4 +13,9 @@ describe('getPageInfo()', () => {
       'Northcoders | The Coding Bootcamp For The North'
     );
   });
+
+  it('returns an array with anchor tags', async () => {
+    const pageInfo = await getPageInfo('https://northcoders.com/');
+    expect(pageInfo.links.length).to.eql(50);
+  });
 });

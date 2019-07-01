@@ -10,7 +10,12 @@ const getPageInfo = async url => {
   }
   const $ = cheerio.load(result.data);
   const title = $('title').text();
-  return { title };
+  const links = [];
+  $('a').each((i, item) => {
+    const link = $(item).attr('href');
+    links.push(link);
+  });
+  return { title, links };
 };
 
 module.exports = getPageInfo;
