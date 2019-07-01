@@ -24,7 +24,7 @@ const getPageInfo = async url => {
   });
 
   // check google analytics
-  googleAnalytics = /src="\/\/www.google-analytics.com\/analytics.js"/.test(
+  googleAnalytics = /www.google-analytics.com\/analytics.js/.test(
     response.data
   );
 

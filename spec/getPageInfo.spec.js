@@ -25,7 +25,7 @@ describe('getPageInfo()', () => {
   });
 
   it('returns googleAnalytics = false if google analytics is not found', async () => {
-    const pageInfo = await getPageInfo('https://northcoders.com/');
+    const pageInfo = await getPageInfo('https://duckduckgo.com/');
     expect(pageInfo.googleAnalytics).to.be.false;
   });
 
