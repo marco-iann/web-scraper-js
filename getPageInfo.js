@@ -27,8 +27,7 @@ const getPageInfo = async url => {
   googleAnalytics = /GoogleAnalyticsObject/.test(response.data);
 
   // check if secure
-  secure = response.request._redirectable._options.protocol === 'https:';
-
+  secure = response.request.res.client._httpMessage.agent.protocol === 'https:';
   return { title, links, googleAnalytics, secure };
 };
 

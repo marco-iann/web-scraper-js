@@ -28,4 +28,9 @@ describe('getPageInfo()', () => {
     const pageInfo = await getPageInfo('https://northcoders.com/');
     expect(pageInfo.secure).to.be.true;
   });
+
+  it('returns secure = false if webpage is not secure', async () => {
+    const pageInfo = await getPageInfo('http://www.stealmylogin.com/');
+    expect(pageInfo.secure).to.be.false;
+  });
 });
