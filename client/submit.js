@@ -1,5 +1,21 @@
 const form = document.querySelector('#form');
 const input = document.querySelector('#input');
+const table = document.querySelector('#table-field');
+
+const fillTable = info => {
+  const { title, links, uniqueDomains, googleAnalytics, secure } = info;
+  const titleField = document.querySelector('#title-field');
+  titleField.innerHTML = title;
+  const linksField = document.querySelector('#links-field');
+  linksField.innerHTML = links;
+  const domainsField = document.querySelector('#domains-field');
+  domainsField.innerHTML = uniqueDomains;
+  const googleField = document.querySelector('#google-field');
+  googleField.innerHTML = googleAnalytics ? 'Yes' : 'No';
+  const secureField = document.querySelector('#secure-field');
+  secureField.innerHTML = secure ? 'Yes' : 'No';
+  table.classList.remove('hidden');
+};
 
 form.addEventListener('submit', event => {
   event.preventDefault();
@@ -13,7 +29,7 @@ form.addEventListener('submit', event => {
     })
     .then(text => {
       const result = JSON.parse(text);
-      console.log(result);
+      fillTable(result);
     });
   input.value = '';
 });

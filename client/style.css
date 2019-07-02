@@ -27,3 +27,12 @@
   width: 300px;
   margin-top: 20px;
 }
+
+#table-field {
+  width: 600px;
+  margin: 50px auto;
+}
+
+.hidden {
+  display: none;
+}

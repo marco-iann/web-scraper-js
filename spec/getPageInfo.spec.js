@@ -28,7 +28,7 @@ describe('getPageInfo()', () => {
 
   it('returns an array with anchor tags', async () => {
     const pageInfo = await getPageInfo('https://northcoders.com/');
-    expect(pageInfo.links.length).to.eql(46);
+    expect(pageInfo.links).to.eql(46);
   });
 
   it('returns amount of unique domain names found in anchor tags', async () => {

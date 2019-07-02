@@ -19,14 +19,14 @@ const getPageInfo = async url => {
   const title = $('title').text();
 
   // get links and unique domains
-  const links = [];
+  let links = 0;
   const uniqueDomainsArray = [];
   $('a[href]').each((i, el) => {
     const link = $(el).attr('href');
+    links++;
     const domain = getDomainName(link);
     if (domain && uniqueDomainsArray.indexOf(domain) === -1)
       uniqueDomainsArray.push(domain);
-    links.push(link);
   });
   const uniqueDomains = uniqueDomainsArray.length;
 
