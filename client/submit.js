@@ -1,6 +1,7 @@
 const form = document.querySelector('#form');
 const input = document.querySelector('#input');
 const table = document.querySelector('#table-field');
+const errorMessage = document.querySelector('#error');
 
 const fillTable = info => {
   const { title, links, uniqueDomains, googleAnalytics, secure } = info;
@@ -19,6 +20,8 @@ const fillTable = info => {
 
 form.addEventListener('submit', event => {
   event.preventDefault();
+  table.classList.add('hidden');
+  errorMessage.classList.add('hidden');
   fetch('/', {
     method: 'POST',
     headers: new Headers({ 'content-type': 'application/json' }),
@@ -29,7 +32,9 @@ form.addEventListener('submit', event => {
     })
     .then(text => {
       const result = JSON.parse(text);
-      fillTable(result);
+      if (result.err) {
+        errorMessage.classList.remove('hidden');
+      } else fillTable(result);
     });
   input.value = '';
 });

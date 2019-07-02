@@ -18,7 +18,7 @@ app.post('/', (req, res) => {
     .then(pageInfo => {
       res.status(200).send(pageInfo);
     })
-    .catch(err => res.send(err));
+    .catch(err => res.status(400).send(err));
 });
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
