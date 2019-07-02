@@ -14,7 +14,7 @@
 }
 
 #form {
-  width: 800px;
+  max-width: 800px;
   margin: 30px auto;
   text-align: center;
 }
@@ -24,12 +24,12 @@
 }
 
 #button {
-  width: 300px;
+  max-width: 300px;
   margin-top: 20px;
 }
 
 #table-field {
-  width: 600px;
+  max-width: 600px;
   margin: 50px auto;
 }
 
