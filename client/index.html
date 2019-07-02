@@ -14,16 +14,23 @@
     />
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <script defer src="./submit.js"></script>
-    <title>Web Crawler</title>
+    <title>Web Scraper</title>
   </head>
   <body>
+    <h1 class="title">Web Scraper</h1>
+    <div id="instructions">
+      <h2 id="instructions-title">Instructions</h2>
+      <p id="instructions-text">
+        Paste a url in the field below and hit Submit
+      </p>
+    </div>
     <form id="form">
       <div class="control has-icons-left has-icons-right">
         <input
           id="input"
           class="input is-rounded is-large"
           type="text"
-          placeholder="Url"
+          placeholder="http://www.example.com"
         />
         <span class="icon is-large is-left">
           <i class="fas fa-globe"></i>
@@ -36,5 +43,6 @@
         <span>Submit</span>
       </button>
     </form>
+    <div id="result"></div>
   </body>
 </html>
