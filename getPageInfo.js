@@ -15,7 +15,7 @@ const getPageInfo = async url => {
 
   // get links
   const links = [];
-  $('a').each((i, el) => {
+  $('a[href]').each((i, el) => {
     const link = $(el).attr('href');
     links.push(link);
   });

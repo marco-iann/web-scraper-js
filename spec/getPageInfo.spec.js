@@ -16,7 +16,7 @@ describe('getPageInfo()', () => {
 
   it('returns an array with anchor tags', async () => {
     const pageInfo = await getPageInfo('https://northcoders.com/');
-    expect(pageInfo.links.length).to.eql(50);
+    expect(pageInfo.links.length).to.eql(46);
   });
 
   it('returns googleAnalytics = true if google analytics is found on the page', async () => {
