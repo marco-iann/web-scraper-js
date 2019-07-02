@@ -1,6 +1,11 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+const getDomainName = url => {
+  var match = url.match(/^http[s]?:\/\/[^/]+/);
+  return match ? match[0] : null;
+};
+
 const getPageInfo = async url => {
   let page = null;
   try {
@@ -13,15 +18,17 @@ const getPageInfo = async url => {
   // get title
   const title = $('title').text();
 
-  // get links
+  // get links and unique domains
   const links = [];
+  const uniqueDomainsArray = [];
   $('a[href]').each((i, el) => {
     const link = $(el).attr('href');
+    const domain = getDomainName(link);
+    if (domain && uniqueDomainsArray.indexOf(domain) === -1)
+      uniqueDomainsArray.push(domain);
     links.push(link);
   });
-  $('script').each((i, el) => {
-    const script = $(el).attr('src');
-  });
+  const uniqueDomains = uniqueDomainsArray.length;
 
   // check google analytics
   googleAnalytics = /www.google-analytics.com\/analytics.js/.test(
@@ -30,7 +37,8 @@ const getPageInfo = async url => {
 
   // check if secure
   secure = response.request.res.client._httpMessage.agent.protocol === 'https:';
-  return { title, links, googleAnalytics, secure };
+
+  return { title, links, uniqueDomains, googleAnalytics, secure };
 };
 
-module.exports = getPageInfo;
+module.exports = { getPageInfo, getDomainName };

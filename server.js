@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const getPageInfo = require('./getPageInfo');
+const { getPageInfo } = require('./getPageInfo');
 const PORT = 9090;
 
 const app = express();
