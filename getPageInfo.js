@@ -1,13 +1,15 @@
+'use strict';
+
 const axios = require('axios');
 const cheerio = require('cheerio');
 
 const getDomainName = url => {
-  var match = url.match(/^http[s]?:\/\/[^/]+/);
+  const match = url.match(/^http[s]?:\/\/[^/]+/);
   return match ? match[0] : null;
 };
 
 const getPageInfo = async url => {
-  let page = null;
+  let response = null;
   try {
     response = await axios.get(url);
   } catch (error) {
@@ -31,14 +33,15 @@ const getPageInfo = async url => {
   const uniqueDomains = uniqueDomainsArray.length;
 
   // check google analytics
-  googleAnalytics = /www.google-analytics.com\/analytics.js/.test(
+  const googleAnalytics = /www.google-analytics.com\/analytics.js/.test(
     response.data
   );
 
   // check if secure
-  secure = response.request.res.client._httpMessage.agent.protocol === 'https:';
+  const secure =
+    response.request.res.client._httpMessage.agent.protocol === 'https:';
 
-  return { title, links, uniqueDomains, googleAnalytics, secure };
+  return { title: title, links, uniqueDomains, googleAnalytics, secure };
 };
 
 module.exports = { getPageInfo, getDomainName };
